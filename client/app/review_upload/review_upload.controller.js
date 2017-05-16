@@ -5,11 +5,12 @@ class ReviewUploadController {
 
   review_upload = {};
 
-  constructor(Review, $state, $scope, $http) {
+  constructor(Review, $state, $scope, $http, Upload) {
     this.Review = Review;
     this.$state  = $state;
     this.$scope = $scope;
     this.$http = $http;
+    this.Upload = Upload;
 
     $scope.items = [
       'programming', 
@@ -57,6 +58,12 @@ class ReviewUploadController {
       }).then((res) => res.data.map((el) => el._id));
     };
 
+    $scope.loadUser = (query) => {
+      return $http.get('/api/reviews/get-users', { 
+        params: { q: query }
+      }).then((res) => res.data.map((el) => el._id)); 
+    };
+    $scope.rates = [];
 
   }
 
@@ -71,28 +78,44 @@ class ReviewUploadController {
       .map((tag) => tag.text);
     this.rvupload.tags = input_tags; 
 
+
+
+    console.log(this.rvupload);
+    console.log(this.rvupload.projfile);
+
+
     if (form.$valid) {
-      //$http.post('/api/projects/', this.pjupload)
-      this.Review.save(this.rvupload).$promise
-        .then((res) => {
-          alert('success');
+      this.Upload.upload({
+        url: '/api/reviews',
+        method: 'POST',
+        data: {
+          _creator: this.rvupload._creator, 
+          title: this.rvupload.title,
+          field: this.rvupload.field, 
+          tags: this.rvupload.tags, 
+          link : this.rvupload.link, 
+          projFile: this.rvupload.projfile,
+          content: this.rvupload.content
+        }
+      })
+        .then(() => {
+          alert('success'); 
           this.$state.go('review_list');
           //location.reload();
-          //console.log(res);
         })
         .catch(err => {
           err = err.data;
           this.errors = {};
-
-          // Update validity of form fields that match the mongoose errors
           angular.forEach(err.errors, (error, field) => {
             form[field].$setValidity('mongoose', false);
             this.errors[field] = error.message;
           });
         });
     }
-
   }
+
+
+
 
 }
 angular.module('projectHeoApp')

@@ -9,8 +9,12 @@ var ReviewSchema = new Schema({
   field    : [],
   tags     : [],
   link     : String,
+  projFile : String,
+  filename : String,
+  existname : String,
   content  : String,
-  date     : { type: Date,  default: Date.now   }
+  date     : { type: Date,  default: Date.now   },
+  like     : Number
 });
 
 ReviewSchema.index( { tags: "text" } )

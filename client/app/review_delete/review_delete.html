@@ -19,6 +19,12 @@
           <td>{{vm.rvdelete.field}}</td>
         </tr>
         <tr>
+          <th data-field="projfile">File</th>
+          <td><a target="_blank" href="{{objectUrl}}" ng-if="objectUrl != 'none'" download={{vm.rvview.existname}}>{{downloadname}}</a>
+            <span ng-if="objectUrl == 'none'">{{downloadname}}</a>
+          </td>
+        </tr>
+        <tr>
           <th data-field="link">Link</th>
           <td><a href="{{vm.rvdelete.link}}" target="_blank">{{vm.rvdelete.link}}</a></td>
         </tr>

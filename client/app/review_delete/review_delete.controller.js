@@ -17,6 +17,18 @@ class ReviewDeleteController {
         console.log(res);
       });
 
+
+    var path = res.projFile;
+    if(res.filename == null){
+      $scope.downloadname = "파일 없음";
+      $scope.objectUrl = "none";
+    }else{
+      $scope.downloadname = res.filename;
+      $scope.objectUrl = "./"+path.slice(2,path.length);
+    }
+    console.log($scope.objectUrl);
+    console.log($scope.downloadname);
+
   }
   del(){
     this.$http.delete('/api/reviews/' + this.$stateParams.myrvId, this.rvdelete)
@@ -24,14 +36,15 @@ class ReviewDeleteController {
         alert('success');
         this.$state.go('myreview');
       })
-    .catch(err => {
-      err = err.data;
-      this.errors = {};
+      .catch(err => {
+        err = err.data;
+        this.errors = {};
 
-    });
+      });
 
   }
 }
 angular.module('projectHeoApp')
-.controller('ReviewDeleteController', ReviewDeleteController);
+  .controller('ReviewDeleteController', ReviewDeleteController);
+
 

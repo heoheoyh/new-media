@@ -9,6 +9,12 @@
         <tr>
           <th data-field="title">Title</th>
           <td>{{vm.rvview.title}}</td>
+          <a class="btn-floating btn-large indigo" ng-click="myFunc()" ng-class="{'active': active}"><i class="small material-icons">thumb_up</i></a>
+          <span style="font-size:17px; margin-left:10px;">{{count}}</span>
+        </tr>
+        <tr>
+          <th data-field="title">Title</th>
+          <td>{{vm.rvview.title}}</td>
         </tr>
         <tr>
           <th data-field="name">Name</th>
@@ -26,6 +32,12 @@
         <tr>
           <th data-field="link">Link</th>
           <td><a href="{{vm.rvview.link}}" target="_blank">{{vm.rvview.link}}</a></td>
+        </tr>
+        <tr>
+          <th data-field="projfile">File</th>
+          <td><a target="_blank" href="{{objectUrl}}" ng-if="objectUrl != 'none'" download={{vm.rvview.existname}}>{{downloadname}}</a>
+            <span ng-if="objectUrl == 'none'">{{downloadname}}</a>
+          </td>
         </tr>
         <tr id="content_box">
           <th data-field="content">Content</th>

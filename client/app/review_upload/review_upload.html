@@ -48,9 +48,30 @@
         </div>
         <div class="row">
           <div class="input-field col s12">
+            <span>Attachments</span>
+            <span>(완성된 프로젝트 파일을 올려주세요)</span><br/>
+            <button style="position: absolute;" type="button" class="btn waves-effect waves-light indigo">파일 선택</button>
+            <input style="opacity: 0; position: relative; height: 100%; width: 100%; cursor: pointer;"
+                   type="file" ngf-select ng-model="vm.rvupload.projfile" ngf-accept="'zip/*'" name ="projfile" ngf-max-size="2GB">
+          </div>
+        </div> 
+        <div class="row">
+          <div class="input-field col s12">
             <span class="prefix">Link</span>
             <input id="rv_link" name="rv_link"  type="url" class="validate" ng-model="vm.rvupload.link" >
             <label for="rv_link">완성된 프로젝트를 볼 수 있는 링크를 넣어주세요</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <span>Team Rating</span>
+            <tags-input id="rv_rate" ng-model="rates" min-length="1">
+              <auto-complete source="loadUser($query)"></auto-complete>
+            </tags-input>
+            <label for="rv_rate"></label>
+            <span class="prefix">Team Review</span>
+            <input id="rv_team" type="text" class="validate" ng-model="vm.rvupload.team">
+            <label for="rv_team"></label>
           </div>
         </div>
         <div class="row">
