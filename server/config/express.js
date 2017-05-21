@@ -68,6 +68,7 @@ export default function(app) {
 
   app.set('appPath', path.join(config.root, 'client'));
   app.use('/uploads', express.static(path.join(config.root, 'uploads'))); 
+  app.use('/files', express.static(path.join(config.root, 'files'))); 
 
   if ('production' === env) {
     app.use(favicon(path.join(config.root, 'client', 'favicon.ico')));

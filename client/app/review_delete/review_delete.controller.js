@@ -15,19 +15,20 @@ class ReviewDeleteController {
       .then((res) => {
         this.rvdelete = res;
         console.log(res);
+        var path = res.projFile;
+        if(res.filename == null){
+          $scope.downloadname = "파일 없음";
+          $scope.objectUrl = "none";
+        }else{
+          $scope.downloadname = res.filename;
+          $scope.objectUrl = "./"+path.slice(2,path.length);
+        }
+        console.log($scope.objectUrl);
+        console.log($scope.downloadname);
+
       });
 
 
-    var path = res.projFile;
-    if(res.filename == null){
-      $scope.downloadname = "파일 없음";
-      $scope.objectUrl = "none";
-    }else{
-      $scope.downloadname = res.filename;
-      $scope.objectUrl = "./"+path.slice(2,path.length);
-    }
-    console.log($scope.objectUrl);
-    console.log($scope.downloadname);
 
   }
   del(){
